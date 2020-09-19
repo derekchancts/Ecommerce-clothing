@@ -9,7 +9,6 @@ const HomePage = () => (
     <Directory />
     <Directory /> 
     <Directory /> 
-    <Directory /> 
   </div>
 )
 
