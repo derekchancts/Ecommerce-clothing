@@ -4,6 +4,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
+    font-size: 1.5rem;
   
     .logo-container {
       height: 100%;
@@ -25,8 +26,18 @@
   
       .option {
         padding: 10px 15px;
+        cursor: pointer;
         // text-decoration: none;
         // color: black;
+      }
+
+      .option:hover {
+        // background: #eee;
+        background: yellow;
+        border-radius: 4px;
+        transform: scale(1.1);
+        font-weight: bold;
+        padding-bottom: 15px;
       }
     }
   }

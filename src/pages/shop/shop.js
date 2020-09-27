@@ -5,13 +5,13 @@ import SHOP_DATA from './shop.data.js';
 
 
 export class ShopPage extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+    // super(props);
 
-    this.state = {
+    state = {
       collections: SHOP_DATA
     }
-  }
+ // }
 
 
   // render() {

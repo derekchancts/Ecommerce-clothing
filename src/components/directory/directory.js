@@ -5,10 +5,10 @@ import './directory.scss'
 
 
 class Directory extends Component {
-  constructor() {
-    super()
+  // constructor() {
+  //   super()
 
-    this.state = {
+    state = {
       sections : [
         {
           title: 'hats',
@@ -50,7 +50,7 @@ class Directory extends Component {
       ]
       
     }
-  }
+//   }
 
 
   // render() {
