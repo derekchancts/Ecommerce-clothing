@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import './sign-in.scss'
 import FormInput from '../form-input/form-input';
 import CustomButton from '../custom-button/custom-button';
+import { withRouter } from "react-router";
 
-import { signInWithGoogle } from '../../firebase/firebase';
+import { auth, signInWithGoogle } from '../../firebase/firebase';
 
 
 class SignIn extends Component {
@@ -13,15 +14,25 @@ class SignIn extends Component {
     password: ''
   }
 
-  handleSubmit = (e) => {
+
+  handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { email, password } = this.state;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: '', password: '' });
+
+      // console.log(this.props)
+      this.props.history.push('/')
+
+    } catch (error) {
+      console.log(error)
+    }
     
-    this.setState({
-      email: '',
-      password: ''
-    })
   }
+
 
   handleChange = (e) => {
     // this.setState({
@@ -29,7 +40,6 @@ class SignIn extends Component {
     // })
 
     const { value, name } = e.target;
-
     this.setState({
       [name]: value
     })
@@ -64,7 +74,7 @@ class SignIn extends Component {
           {/* <input type="submit" value="Submit Form" /> */}
           <div className="buttons">
             <CustomButton type="submit"> Sign in </CustomButton>
-            <CustomButton onClick={signInWithGoogle} isGoogleSignIn > Sign in with Google </CustomButton>
+            <CustomButton type="button" onClick={signInWithGoogle} isGoogleSignIn > Sign in with Google </CustomButton>
           </div>
         </form>
       </div>
@@ -73,4 +83,4 @@ class SignIn extends Component {
 }
 
 
-export default SignIn
+export default withRouter(SignIn)

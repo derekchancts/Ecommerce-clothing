@@ -24,14 +24,19 @@ const Header = ({ currentUser }) => (
       </Link>
       {/* <Link className='option' to='/signin'>
         Sign In
-      </Link> */}
-      {
-        currentUser ? (
-          <div className='option' onClick={() => auth.signOut()}> Sign Out</div>
-        ) : (
-          <Link className='option' to='/signin'> Sign In</Link>
-        )
-      }
+      </Link> */} 
+      <div>
+        {
+          currentUser ? (
+            <div className='option' onClick={async () => { 
+              await auth.signOut().then(() => console.log('user signed out successfully'))
+              } }> Sign Out</div>
+          ) : (
+            <Link className='option' to='/signin'> Sign In</Link>
+          )
+        }
+      </div>
+
     </div>
   </div>
 )
