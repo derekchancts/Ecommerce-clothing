@@ -25,7 +25,7 @@ class SignIn extends Component {
       this.setState({ email: '', password: '' });
 
       // console.log(this.props)
-      this.props.history.push('/')
+      // this.props.history.push('/')
 
     } catch (error) {
       console.log(error)
