@@ -6,7 +6,7 @@ import { withRouter } from "react-router";
 
 import { auth, signInWithGoogle } from '../../firebase/firebase';
 
-
+ 
 class SignIn extends Component {
 
   state = {
