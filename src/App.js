@@ -11,8 +11,10 @@ import { auth, createUserProfileDocument } from './firebase/firebase';
 import { connect } from 'react-redux';
 
 import { setCurrentUser } from './redux/user/user-actions'
+import { selectCurrentUser } from './redux/user/user-selectors'
+import CheckoutPage from './pages/checkout/checkout';
 
-
+ 
 /*
 function App() {
 
@@ -134,11 +136,11 @@ class App extends Component {
           <Switch>
               <Route exact path='/' component={HomePage} />
               <Route path='/shop' component={ShopPage} />
+              <Route exact path='/checkout' component={CheckoutPage} />
               {/* <Route path='/signin' component={SignInAndSignUpPage} /> */}
               <Route exact path='/signin' 
                 render={() => this.props.currentUser ? 
                 (<Redirect to='/' />) : (<SignInAndSignUpPage />) } />
-             
           </Switch>
         </Router>
       </>
@@ -148,8 +150,12 @@ class App extends Component {
 }
 
 
+// const mapStateToProps = (state) => ({
+//   currentUser: state.user.currentUser
+// })
+
 const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser
+  currentUser: selectCurrentUser(state)
 })
 
 
