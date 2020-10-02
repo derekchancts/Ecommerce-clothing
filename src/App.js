@@ -1,7 +1,8 @@
 // import React, { useState, useEffect } from 'react';
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+// import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import {  Switch, Route, Redirect } from 'react-router-dom';
 import HomePage from './pages/homepage/homepage';
 import ShopPage from './pages/shop/shop';
 import Header from './components/header/header';
@@ -130,7 +131,7 @@ class App extends Component {
 
     return (
       <>
-        <Router>
+        {/* <Router> */}
           {/* <Header currentUser={this.state.currentUser} /> */}
           <Header />
           <Switch>
@@ -142,7 +143,7 @@ class App extends Component {
                 render={() => this.props.currentUser ? 
                 (<Redirect to='/' />) : (<SignInAndSignUpPage />) } />
           </Switch>
-        </Router>
+        {/* </Router> */}
       </>
     );
   }
