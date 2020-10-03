@@ -1,5 +1,6 @@
 .collection-item {
-    width: 22%;
+    // width: 22%;  // 22% width of the actual container
+    width: 22vw;  //view width  (22% width of the actual window)
     display: flex;
     flex-direction: column;
     height: 350px;

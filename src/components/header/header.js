@@ -1,5 +1,5 @@
-// import React, { useState, useEffect} from 'react'
-import React from 'react'
+import React, { useState, useEffect} from 'react'
+// import React from 'react'
 import './header.scss'
 
 import { Link } from 'react-router-dom'
@@ -38,24 +38,24 @@ import { selectCartHidden } from '../../redux/cart/cart-selectors'
 
 const Header = ({ currentUser, hidden }) => {
 
-  // const [color, setColor] = useState('white')
+  const [color, setColor] = useState('white')
 
-  // const listenScrollEvent = e => {
-  //   if (window.scrollY > 0) {
-  //     setColor('yellow')
-  //   } else {
-  //     setColor('white')
-  //   }
-  // }
+  const listenScrollEvent = e => {
+    if (window.scrollY > 0) {
+      setColor('#fff')
+    } else {
+      setColor('white')
+    }
+  }
 
-  // useEffect(() => {
-  //   window.addEventListener('scroll', listenScrollEvent)
-  // }, [])
+  useEffect(() => {
+    window.addEventListener('scroll', listenScrollEvent)
+  }, [])
  
 
  return (
-  // <div className='header' style={{backgroundColor: color}}>
-  <div className='header'>
+  <div className='header' style={{backgroundColor: color}}>
+  {/* <div className='header'> */}
     <Link className='logo-container' to='/'>
       {/* <Logo className='logo' /> */}
       <img src={logo} alt="img" className='logo'></img>

@@ -15,7 +15,7 @@ import { setCurrentUser } from './redux/user/user-actions'
 import { selectCurrentUser } from './redux/user/user-selectors'
 import CheckoutPage from './pages/checkout/checkout';
 
- 
+
 /*
 function App() {
 
