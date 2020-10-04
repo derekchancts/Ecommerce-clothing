@@ -10,7 +10,14 @@ if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger);
 }
 
+const devTools =
+  process.env.NODE_ENV === "production"
+    ? applyMiddleware(...middlewares)
+    : compose (applyMiddleware(...middlewares),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() )
 
+
+/*
 export const store = createStore(
   rootReducer, 
   compose (applyMiddleware(...middlewares),
@@ -18,6 +25,10 @@ export const store = createStore(
   // compose (applyMiddleware(...middlewares),
   //                            )
   )
+*/
+
+
+export const store = createStore(rootReducer, devTools);
 
 export const persistor = persistStore(store);  
 
