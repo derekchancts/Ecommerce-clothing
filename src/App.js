@@ -8,12 +8,15 @@ import ShopPage from './pages/shop/shop';
 import Header from './components/header/header';
 import SignInAndSignUpPage from './pages/sign/sign';
 
+// import { auth, createUserProfileDocument, addcollectionAndDocuments } from './firebase/firebase';
 import { auth, createUserProfileDocument } from './firebase/firebase';
 import { connect } from 'react-redux';
 
 import { setCurrentUser } from './redux/user/user-actions'
 import { selectCurrentUser } from './redux/user/user-selectors'
 import CheckoutPage from './pages/checkout/checkout';
+// import { selectCollectionsForPreview } from './redux/shop/shop-selectors'
+import { createStructuredSelector } from 'reselect'
 
 
 /*
@@ -73,6 +76,7 @@ function App() {
 
 
 
+/*
 class App extends Component {
   // state = {
   //   currentUser: null
@@ -120,6 +124,61 @@ class App extends Component {
       }
     })
   }  
+*/
+
+
+  // class App extends Component {
+  //   unsubscribeFromAuth = null;
+  
+  //   componentDidMount() {
+  //     const { setCurrentUser, collectionsArray } = this.props;
+  
+  //     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+  
+  //       if (userAuth) {
+  //         const userRef = await createUserProfileDocument(userAuth);  
+         
+  //         userRef.onSnapshot(snapshot => {
+  //           setCurrentUser({
+  //                id: snapshot.id,
+  //              ...snapshot.data()
+  //           })
+  //         })
+          
+  //       }
+  //       else {
+  //         setCurrentUser(userAuth);
+  //         addcollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items})));
+  //       }
+  //     })
+  //   }  
+
+
+  class App extends Component {
+    unsubscribeFromAuth = null;
+  
+    componentDidMount() {
+      const { setCurrentUser } = this.props;
+  
+      this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+  
+        if (userAuth) {
+          const userRef = await createUserProfileDocument(userAuth);  
+         
+          userRef.onSnapshot(snapshot => {
+            setCurrentUser({
+                 id: snapshot.id,
+               ...snapshot.data()
+            })
+          })
+          
+        }
+        else {
+          setCurrentUser(userAuth);
+        }
+      })
+    }  
+
 
 
   componentWillUnmount() {
@@ -155,8 +214,13 @@ class App extends Component {
 //   currentUser: state.user.currentUser
 // })
 
-const mapStateToProps = (state) => ({
-  currentUser: selectCurrentUser(state)
+// const mapStateToProps = (state) => ({
+//   currentUser: selectCurrentUser(state)
+// })
+
+const mapStateToProps = createStructuredSelector ({
+  currentUser: selectCurrentUser,
+  // collectionsArray: selectCollectionsForPreview
 })
 
 

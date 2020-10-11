@@ -14,9 +14,9 @@ var firebaseConfig = {
 };
 
 
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
-
   // console.log(firestore.doc('users/kCYlntaTzQ3C5QLOB1LW'))
 
   // const userRef = firestore.doc('users/kCYlntaTzQ3C5QLOB1LW')
@@ -45,6 +45,48 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   return userRef;
 }
+
+
+
+// Add data to Firestore (use only once)
+export const addcollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = firestore.collection(collectionKey);
+  // console.log(collectionRef)
+
+  const batch = firestore.batch();
+  objectsToAdd.forEach(obj => {
+    const newDocRef = collectionRef.doc();
+    // console.log(newDocRef)
+    batch.set(newDocRef, obj);
+  })
+
+  return await batch.commit()
+} 
+
+
+
+// convert the array to an object
+// used in shopPage at comonentDidMount
+// collections.docs - this gives us back the query snapshot array 
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map(doc => {
+    const { title, items } = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items
+    }
+  })
+
+  // console.log(transformedCollection)
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {})
+}
+
 
 
 // Initialize Firebase

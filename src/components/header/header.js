@@ -1,8 +1,9 @@
 import React, { useState, useEffect} from 'react'
 // import React from 'react'
-import './header.scss'
+// import './header.scss'
+import { HeaderContainer, LogoContainer , OptionsContainer, OptionLink, OptionDiv } from './header-styles'
 
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 // import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/firebase'
 // import logo  from '../../assets/logo.png'
@@ -53,49 +54,103 @@ const Header = ({ currentUser, hidden }) => {
   }, [])
  
 
- return (
-  <div className='header' style={{backgroundColor: color}}>
-  {/* <div className='header'> */}
-    <Link className='logo-container' to='/'>
-      {/* <Logo className='logo' /> */}
-      <img src={logo} alt="img" className='logo'></img>
-    </Link>
-    <div className='options'>
-      <Link className='option' to='/'>
+//  return (
+//   <div className='header' style={{backgroundColor: color}}>
+//   {/* <div className='header'> */}
+//     <Link className='logo-container' to='/'>
+//       {/* <Logo className='logo' /> */}
+//       <img src={logo} alt="img" className='logo'></img>
+//     </Link>
+//     <div className='options'>
+//       <Link className='option' to='/'>
+//         Home
+//       </Link>
+//       <Link className='option' to='/shop'>
+//         Shop
+//       </Link>
+//       <Link className='option' to='/contact'>
+//         Contact
+//       </Link>
+//       {/* <Link className='option' to='/signin'>
+//         Sign In
+//       </Link> */} 
+//       <div>   
+//         {
+//           currentUser ? (
+//             <div className='option' onClick={async () => { 
+//               await auth.signOut().then(() => console.log('user signed out successfully'))
+//               } }>Sign_Out</div>
+//           ) : (
+//             <Link className='option' to='/signin'>Sign_In</Link>
+//           )
+//         }
+//       </div>
+//       <CartIcon />
+//       {/* <div onClick={handleClick} >
+//         <CartIcon />
+//       </div> */}
+//       </div>
+
+//       { 
+//         hidden ? null :  <CartDropdown /> 
+//       }
+
+//   </div>
+// )}
+
+
+
+return (
+  <HeaderContainer style={{backgroundColor: color}}>
+    <LogoContainer to='/'>
+      <img src={logo} alt="img" ></img>
+    </LogoContainer>
+    <OptionsContainer>
+      <OptionLink to='/'>
         Home
-      </Link>
-      <Link className='option' to='/shop'>
+      </OptionLink>
+      <OptionLink  to='/shop'>
         Shop
-      </Link>
-      <Link className='option' to='/contact'>
+      </OptionLink>
+      <OptionLink  to='/contact'>
         Contact
-      </Link>
-      {/* <Link className='option' to='/signin'>
-        Sign In
-      </Link> */} 
+      </OptionLink>
       <div>   
         {
           currentUser ? (
-            <div className='option' onClick={async () => { 
+            <OptionDiv  onClick={async () => { 
               await auth.signOut().then(() => console.log('user signed out successfully'))
-              } }>Sign_Out</div>
+              } }>SignOut</OptionDiv>
           ) : (
-            <Link className='option' to='/signin'>Sign_In</Link>
+            <OptionLink to='/signin'>SignIn</OptionLink>
           )
         }
       </div>
       <CartIcon />
-      {/* <div onClick={handleClick} >
-        <CartIcon />
-      </div> */}
-      </div>
+      </OptionsContainer>
 
       { 
         hidden ? null :  <CartDropdown /> 
       }
 
-  </div>
-)}
+  </HeaderContainer>
+  )
+
+}
+
+
+/*
+currentUser ? (
+            <OptionLink as='div'  onClick={async () => { 
+              await auth.signOut().then(() => console.log('user signed out successfully'))
+              } }>SignOut</OptionLink>
+          ) : (
+            <OptionLink to='/signin'>SignIn</OptionLink>
+          )
+
+*/
+
+
 
 
 // const mapStateToProps = (state) => ({
