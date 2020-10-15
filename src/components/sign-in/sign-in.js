@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+// import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 import './sign-in.scss'
@@ -10,21 +11,31 @@ import { withRouter } from "react-router";
 import { googleSignInStart, emailSignInStart } from '../../redux/user/user-actions'
 
  
-class SignIn extends Component {
+const SignIn = (props) => {
 
-  state = {
-    email: '',
-    password: ''
-  }
+// class SignIn extends Component {
+
+  // state = {
+  //   email: '',
+  //   password: ''
+  // }
+
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  const [userCredentials, setCredentials] = useState({ email: '', password: ''});
 
 
-  handleSubmit = async (e) => {
+  const { email, password } = userCredentials;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const { emailSignInStart } = this.props;
-    const { email, password } = this.state;
+    const { emailSignInStart } = props;
 
+    // const { email, password } = this.state;
+    
     emailSignInStart(email, password)
+
 
     /*
     try {
@@ -41,42 +52,56 @@ class SignIn extends Component {
   }
 
 
-  handleChange = (e) => {
+  const handleChange = (e) => {
     // this.setState({
     //   [e.target.name]: e.target.value
     // })
 
     const { name, value } = e.target;
-    this.setState({
+    // this.setState({
+    //   [name]: value
+    // })
+
+    setCredentials({
+      ...userCredentials,
       [name]: value
     })
+
+    // setCredentials({
+    //   ...userCredentials,
+    //   [e.target.name]: e.target.value
+    // })
   }
 
 
-  render() {
-    const { googleSignInStart } = this.props;
+  // render() {
+    const { googleSignInStart } = props;
 
     return (
       <div className='sign-in'>
         <h2>I already have an account</h2>
         <span>Sign in with your email and password</span>
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <FormInput 
             name="email" 
             type="email" 
-            value={this.state.email} 
+            // value={userCredentials.email} 
+            value={email} 
             required 
-            handleChange={this.handleChange}
+            // handleChange={(e) => setEmail(e.target.value)}
+            handleChange={handleChange}
             label="email" 
           />
           {/* <label>Email</label> */}
           <FormInput 
             name="password" 
             type="password" 
-            value={this.state.password} 
+            // value={userCredentials.password} 
+            value={password} 
             required 
-            handleChange={this.handleChange}
+            // handleChange={(e) => setPassword(e.target.value)}
+            handleChange={handleChange}
             label="password"
           />
           {/* <label>Password</label> */}
@@ -89,7 +114,7 @@ class SignIn extends Component {
         </form>
       </div>
     )
-  }
+  // }
 }
 
 

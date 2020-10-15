@@ -1,8 +1,8 @@
-// import React, { useState, useEffect } from 'react';
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
+// import React, { Component } from 'react';
 import './App.css';
 // import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import {  Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import HomePage from './pages/homepage/homepage';
 import ShopPage from './pages/shop/shop';
 import Header from './components/header/header';
@@ -182,13 +182,19 @@ class App extends Component {
     // }  
 
 
-class App extends Component {
-  unsubscribeFromAuth = null;
+const App = ({ checkUserSession, currentUser }) => {
 
-  componentDidMount() {
-    const { checkUserSession } = this.props;  
+// class App extends Component {
+  // unsubscribeFromAuth = null;
+
+  // componentDidMount() {
+  //   const { checkUserSession } = this.props;  
+  //   checkUserSession();
+  // }
+
+  useEffect(() => {
     checkUserSession();
-  }
+  }, [checkUserSession])
 
 
   // componentWillUnmount() {
@@ -196,7 +202,7 @@ class App extends Component {
   // }
     
 
-  render() {
+  // render() {
 
     return (
       <>
@@ -209,13 +215,14 @@ class App extends Component {
               <Route exact path='/checkout' component={CheckoutPage} />
               {/* <Route path='/signin' component={SignInAndSignUpPage} /> */}
               <Route exact path='/signin' 
-                render={() => this.props.currentUser ? 
+                // render={() => this.props.currentUser ? 
+                render={() => currentUser ? 
                 (<Redirect to='/' />) : (<SignInAndSignUpPage />) } />
           </Switch>
         {/* </Router> */}
       </>
     );
-  }
+  // }
 
 }
 

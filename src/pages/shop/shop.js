@@ -265,7 +265,7 @@ import { fetchCollectionsStartAsync } from '../../redux/shop/shop-actions'
 
 
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route } from 'react-router-dom'
 
 import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview-container'
@@ -276,18 +276,27 @@ import { connect } from 'react-redux'
 import { fetchCollectionsStart } from '../../redux/shop/shop-actions'
 
 
-  class ShopPage extends React.Component {
+
+
+  const ShopPage = ({ fetchCollectionsStart, match }) => {
+
+  
+  // class ShopPage extends React.Component {
     
-    componentDidMount() {
-      // const { fetchCollectionsStartAsync } = this.props;
-      // fetchCollectionsStartAsync()
+    // componentDidMount() {
+    //   // const { fetchCollectionsStartAsync } = this.props;
+    //   // fetchCollectionsStartAsync()
 
-      const { fetchCollectionsStart } = this.props;
+    //   const { fetchCollectionsStart } = this.props;
+    //   fetchCollectionsStart()
+    // }
+
+    useEffect(() => {
       fetchCollectionsStart()
-    }
+    },[fetchCollectionsStart])
 
-    render() {
-      const { match } = this.props;
+    // render() {
+      // const { match } = this.props;
 
       return (
       <div className='shop-page'>
@@ -299,8 +308,7 @@ import { fetchCollectionsStart } from '../../redux/shop/shop-actions'
         />
       </div>
       )
-    }
-
+    // }
   } 
 
 

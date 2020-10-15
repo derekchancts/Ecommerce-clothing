@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+// import React, { Component } from 'react'
+import React, { useState } from 'react'
 import './sign-up.scss'
 import FormInput from '../form-input/form-input';
 import CustomButton from '../custom-button/custom-button';
@@ -9,21 +10,33 @@ import { connect } from 'react-redux'
 import { signUpStart } from '../../redux/user/user-actions'
 
 
-class SignUp extends Component {
 
-  state = {
-    displayName: '',
-    email: '',
-    password: '',
+const SignUp = ({ signUpStart }) => {
+
+// class SignUp extends Component {
+
+  // state = {
+  //   displayName: '',
+  //   email: '',
+  //   password: '',
+  //   confirmPassword: ''
+  // }
+
+  const [userCredentials, setCredentials] = useState({ 
+    displayName: '', 
+    email: '', 
+    password: '', 
     confirmPassword: ''
-  }
+  });
 
 
-  handleSubmit = async (e) => {
+  const { displayName, email, password, confirmPassword } = userCredentials;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { displayName, email, password, confirmPassword } = this.state;
-    const { signUpStart } = this.props;
+    // const { displayName, email, password, confirmPassword } = this.state;
+    // const { signUpStart } = this.props;
 
     signUpStart(displayName, email, password, confirmPassword)
 
@@ -52,8 +65,13 @@ class SignUp extends Component {
 
 
 
-  handleChange = (e) => {
-    this.setState({
+  const handleChange = (e) => {
+    // this.setState({
+    //   [e.target.name]: e.target.value
+    // })
+
+    setCredentials({
+      ...userCredentials,
       [e.target.name]: e.target.value
     })
 
@@ -64,20 +82,20 @@ class SignUp extends Component {
   }
 
 
-  render() {
+  // render() {
 
-    const { displayName, email, password, confirmPassword } = this.state;
+    // const { displayName, email, password, confirmPassword } = this.state;
 
     return (
       <div className='sign-up'>
         <h2 className='title'>I do not have an account</h2>
         <span>Sign up with your email and password</span>
-        <form className='sign-up-form' onSubmit={this.handleSubmit}>
+        <form className='sign-up-form' onSubmit={handleSubmit}>
           <FormInput
             type='text'
             name='displayName'
             value={displayName}
-            onChange={this.handleChange}
+            onChange={handleChange}
             label='Display Name'
             required
           />
@@ -85,7 +103,7 @@ class SignUp extends Component {
             type='email'
             name='email'
             value={email}
-            onChange={this.handleChange}
+            onChange={handleChange}
             label='Email'
             required
           />
@@ -93,7 +111,7 @@ class SignUp extends Component {
             type='password'
             name='password'
             value={password}
-            onChange={this.handleChange}
+            onChange={handleChange}
             label='Password'
             required
           />
@@ -101,7 +119,7 @@ class SignUp extends Component {
             type='password'
             name='confirmPassword'
             value={confirmPassword}
-            onChange={this.handleChange}
+            onChange={handleChange}
             label='Confirm Password'
             required
           />
@@ -111,7 +129,7 @@ class SignUp extends Component {
         </form>
       </div>
     )
-  }
+  // }
 }
 
 
